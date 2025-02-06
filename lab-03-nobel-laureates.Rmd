@@ -211,6 +211,13 @@ You don't have to switch at each exercise, you can find your a cadence that work
 
 1.  How many observations and how many variables are in the dataset? Use inline code to answer this question. What does each row represent?
 
+```{r}
+names(nobel)
+nrow(nobel)
+glimpse(nobel)
+```
+Each row represents a Nobel laureate.
+
 There are some observations in this dataset that we will exclude from our analysis to match the Buzzfeed results.
 
 2.  Create a new data frame called `nobel_living` that filters for
@@ -218,6 +225,17 @@ There are some observations in this dataset that we will exclude from our analys
 -   laureates for whom `country` is available
 -   laureates who are people as opposed to organizations (organizations are denoted with `"org"` as their `gender`)
 -   laureates who are still alive (their `died_date` is `NA`)
+
+```{r}
+#nobel_living
+
+nobel %>%
+  filter(!is.na(country)) %>%           
+  filter(gender != "org") %>%           
+  filter(is.na(died_date))              
+
+```
+
 
 ```{r echo=FALSE}
 nobel_living <- nobel %>%
