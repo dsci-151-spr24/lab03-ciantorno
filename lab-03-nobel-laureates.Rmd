@@ -227,7 +227,7 @@ There are some observations in this dataset that we will exclude from our analys
 -   laureates who are still alive (their `died_date` is `NA`)
 
 ```{r}
-#nobel_living
+# nobel_living
 
 nobel %>%
   filter(!is.na(country)) %>%           
@@ -236,17 +236,6 @@ nobel %>%
 
 ```
 
-
-```{r echo=FALSE}
-nobel_living <- nobel %>%
-  filter(
-    !is.na(country),
-    gender != "org",
-    is.na(died_date)
-  )
-```
-
-Confirm that once you have filtered for these characteristics you are left with a data frame with `r nrow(nobel_living)` observations, once again using inline code.
 
 🧶 ✅ ⬆️ Knit, *commit, and push your changes to GitHub with an appropriate commit message. Make sure to commit and push all changed files so that your Git pane is cleared up afterwards.*
 
@@ -268,7 +257,7 @@ Note that we can achieve the same result using the `fct_other()` function we've 
 ```
 
 ```{r}
-nobel_living <- nobel_living %>%
+nobel_living <- nobel %>%
   mutate(
     country_us = if_else(country == "USA", "USA", "Other")
   )
@@ -290,6 +279,21 @@ This means you'll need to define this data frame in your R Markdown document, ev
     -   Your visualization should be faceted by category.
     -   For each facet you should have two bars, one for winners in the US and one for Other.
     -   Flip the coordinates so the bars are horizontal, not vertical.
+
+```{r}
+
+ggplot(nobel_living_science, aes(x = category, fill = "USA")) +
+  geom_bar(position = "dodge") +  
+  coord_flip() +  
+  facet_wrap(~category) +  
+  labs(title = "Nobel Prize Winners: US vs Other Countries by Category",
+       x = "Number of Laureates",
+       y = "Category",
+       fill = "Location") +
+  scale_fill_manual(values = c("US" = "blue", "Other" = "red")) +  
+  theme_minimal()  
+```
+
 
 🧶 ✅ ⬆️ Knit, *commit, and push your changes to GitHub with an appropriate commit message. Make sure to commit and push all changed files so that your Git pane is cleared up afterwards.d*
 
