@@ -283,7 +283,7 @@ ggplot(data = nobel_living_science, aes(y=country_us)) +
   facet_wrap(~category)
 ```
 
-This Buzzfeed headline is supported by data because this graph shows that most living laureates were based in the US when they won their prizes.
+***This Buzzfeed headline is supported by data because this graph shows that most living laureates were based in the US when they won their prizes.***
 
 
 🧶 ✅ ⬆️ Knit, *commit, and push your changes to GitHub with an appropriate commit message. Make sure to commit and push all changed files so that your Git pane is cleared up afterwards.d*
@@ -307,7 +307,7 @@ nobel_living_science %>%
   group_by(born_country_us) %>%
   count()
 ```
-105 of the winners are born in the US.
+***105 of the winners are born in the US.***
 
 5.  Add a second variable to your visualization from Exercise 3 based on whether the laureate was born in the US or not.
     Based on your visualization, do the data appear to support Buzzfeed's claim?
@@ -324,7 +324,7 @@ ggplot(data = nobel_living_science, aes(y=country_us, fill=born_country_us)) +
   geom_bar() +
   facet_wrap(~category)
 ```    
-The data appears to support Buzzfeed's claim because the red parts of the USA bars in this graph appear to have a similar count as the ones in the Buzzfeed article. 
+***The data appears to support Buzzfeed's claim because the red parts of the USA bars in this graph appear to have a similar count as the ones in the Buzzfeed article.*** 
 
 🧶 ✅ ⬆️ Knit, *commit, and push your changes to GitHub with an appropriate commit message. Make sure to commit and push all changed files so that your Git pane is cleared up afterwards.*
 
@@ -336,7 +336,14 @@ Note that your bar plot won't exactly match the one from the Buzzfeed article. T
 
 6.  In a single pipeline, filter for laureates who won their prize in the US, but were born outside of the US, and then create a frequency table (with the `count()` function) for their birth country (`born_country`) and arrange the resulting data frame in descending order of number of observations for each country. Which country is the most common?
 
+```{r}
+nobel_living_science %>%
+  filter(born_country_us == "Other") %>%
+  count(born_country) %>%
+  arrange(desc(n))
+```
 
+***Germany is the most common with 20 followed closely by Japan and UK.***
 
 🧶 ✅ ⬆️ Knit, *commit, and push your changes to GitHub with an appropriate commit message. Make sure to commit and push all changed files so that your Git pane is cleared up afterwards and review the md document on GitHub to make sure you're happy with the final state of your work.*
 
